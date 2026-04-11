@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+USAGE="Usage: gamedev -p <path>"
+EDITOR_CMD="${EDITOR:-nvim}"
+
+show_help() {
+  echo "$USAGE"
+  echo ""
+  echo "  -p <path>   Path to the project directory"
+  echo "  -h          Show this help message"
+  exit 0
+}
+
+while getopts "p:h" opt; do
+  case $opt in
+    p) PROJECT_PATH="$OPTARG" ;;
+    h) show_help ;;
+    *) echo "$USAGE" >&2; exit 1 ;;
+  esac
+done
+
+if [ -z "$PROJECT_PATH" ]; then
+  echo "Error: -p <path> is required" >&2
+  echo "$USAGE" >&2
+  exit 1
+fi
+
+if [ ! -d "$PROJECT_PATH" ]; then
+  echo "Error: '$PROJECT_PATH' is not a valid directory" >&2
+  exit 1
+fi
+
+PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
+SESSION_NAME="gamedev-$(basename "$PROJECT_PATH")"
+
+if [ -n "$TMUX" ]; then
+  echo "Error: already inside a tmux session. Detach first or run from outside tmux." >&2
+  exit 1
+fi
+
+tmux kill-session -t "$SESSION_NAME" 2>/dev/null
+
+# Window 1: EDITOR
+tmux new-session -d -s "$SESSION_NAME" -c "$PROJECT_PATH" -n "editor"
+tmux send-keys -t "$SESSION_NAME:editor" "$EDITOR_CMD" Enter
+
+# Window 2: AI Workflow
+tmux new-window -t "$SESSION_NAME" -n "opencode" -c "$PROJECT_PATH"
+tmux send-keys -t "$SESSION_NAME:opencode" 'opencode' Enter
+tmux split-window -h -t "$SESSION_NAME:opencode" -c "$PROJECT_PATH"
+tmux send-keys -t "$SESSION_NAME:opencode" 'opencode' Enter
+
+# Window 3: Scripts / Git
+tmux new-window -t "$SESSION_NAME" -n "dev" -c "$PROJECT_PATH"
+tmux split-window -h -t "$SESSION_NAME:dev" -c "$PROJECT_PATH"
+tmux select-pane -t "$SESSION_NAME:dev.0"
+tmux split-window -v -t "$SESSION_NAME:dev" -c "$PROJECT_PATH"
+
+tmux select-window -t "$SESSION_NAME:editor"
+tmux attach -t "$SESSION_NAME"
+
