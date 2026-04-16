@@ -1,11 +1,11 @@
 # gamedev
 
-tmux session manager for my game development workflow. Spins up a pre-configured session with windows for the editor, two pi agent instances, and a general dev terminal.
+tmux session manager for my game development workflow. Spins up a pre-configured session with windows for the editor, two pi agent instances, and a general dev terminal with 3 panes.
 
 ## Windows
 
 - `editor` — launches `$EDITOR` (defaults to Neovim)
-- `opencode` — two side-by-side panes running `opencode`
+- `pi` — two side-by-side panes running `pi`
 - `dev` — three panes for git, project scripts, and general use
 
 ## Usage
