@@ -1,6 +1,6 @@
 # gamedev
 
-tmux session manager for my game development workflow. Spins up a pre-configured session with windows for the editor, two opencode instances, and a general dev terminal.
+tmux session manager for my game development workflow. Spins up a pre-configured session with windows for the editor, two pi agent instances, and a general dev terminal.
 
 ## Windows
 
