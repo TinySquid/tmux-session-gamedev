@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 mkdir -p ~/.local/bin
-cp gamedev ~/.local/bin/gamedev
-chmod +x ~/.local/bin/gamedev
+cp dev ~/.local/bin/dev
+chmod +x ~/.local/bin/dev

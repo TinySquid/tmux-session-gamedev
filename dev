@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-USAGE="Usage: gamedev -p <path>"
+USAGE="Usage: dev -p <path>"
 EDITOR_CMD="${EDITOR:-nvim}"
 
 show_help() {
   echo "$USAGE"
   echo ""
-  echo "  -p <path>   Path to the project directory"
+  echo "  -p <path>   Path to working directory"
   echo "  -h          Show this help message"
   exit 0
 }
@@ -31,7 +31,7 @@ if [ ! -d "$PROJECT_PATH" ]; then
 fi
 
 PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
-SESSION_NAME="gamedev-$(basename "$PROJECT_PATH")"
+SESSION_NAME="dev-$(basename "$PROJECT_PATH")"
 
 if [ -n "$TMUX" ]; then
   echo "Error: already inside a tmux session. Detach first or run from outside tmux." >&2

@@ -1,6 +1,6 @@
-# gamedev
+# dev workflow
 
-tmux session manager for my game development workflow. Spins up a pre-configured session with windows for the editor, two pi agent instances, and a general dev terminal with 3 panes.
+tmux session manager for my development workflow. Spins up a pre-configured session with windows for the editor, two pi agent instances, and a general dev terminal.
 
 ## Windows
 
@@ -11,11 +11,12 @@ tmux session manager for my game development workflow. Spins up a pre-configured
 ## Usage
 
 ```bash
-gamedev -p <path>    # Launch session for a project
-gamedev -h           # Show help
+dev              # Launch session for current directory
+dev -p <path>    # Launch session for a directory
+dev -h           # Show help
 ```
 
-Session names are derived from the project directory name (e.g., `gamedev-myproject`), so multiple project sessions can exist simultaneously.
+Session names are derived from the working directory name (e.g., `dev-myproject`), so multiple sessions can exist simultaneously.
 
 ## Installation
 
@@ -23,4 +24,4 @@ Session names are derived from the project directory name (e.g., `gamedev-myproj
 ./install.sh
 ```
 
-Helper to install the `gamedev` script to `~/.local/bin` and make it executable. Ensure `~/.local/bin` is in `$PATH`.
+Helper to install the `dev` script to `~/.local/bin` and make it executable. Ensure `~/.local/bin` is in `$PATH`.
