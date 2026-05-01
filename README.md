@@ -1,12 +1,12 @@
 # dev workflow
 
-tmux session manager for my development workflow. Spins up a pre-configured session with windows for the editor, two pi agent instances, and a general dev terminal.
+tmux session manager for my development workflow. Spins up a pre-configured session with windows for the editor, two pi agent instances, and a general 3-pane split window for scripts, gitflow, general-use.
 
 ## Windows
 
 - `editor` — launches `$EDITOR` (defaults to Neovim)
 - `pi` — two side-by-side panes running `pi`
-- `dev` — three panes for git, project scripts, and general use
+- `extra` — three panes for git, scripts, and otherwise general-use panes
 
 ## Usage
 

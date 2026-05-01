@@ -46,11 +46,12 @@ tmux send-keys -t "$SESSION_NAME:pi" 'pi' Enter
 tmux split-window -h -t "$SESSION_NAME:pi" -c "$PROJECT_PATH"
 tmux send-keys -t "$SESSION_NAME:pi" 'pi' Enter
 
-# Window 3: Scripts / Git
-tmux new-window -t "$SESSION_NAME" -n "dev" -c "$PROJECT_PATH"
-tmux split-window -h -t "$SESSION_NAME:dev" -c "$PROJECT_PATH"
-tmux select-pane -t "$SESSION_NAME:dev.1"
-tmux split-window -v -t "$SESSION_NAME:dev" -c "$PROJECT_PATH"
+# Window 3: Scripts / Git / Extra Terminal Panes
+tmux new-window -t "$SESSION_NAME" -n "extra" -c "$PROJECT_PATH"
+tmux split-window -h -t "$SESSION_NAME:extra" -c "$PROJECT_PATH"
+tmux select-pane -t "$SESSION_NAME:extra.1"
+tmux split-window -v -t "$SESSION_NAME:extra" -c "$PROJECT_PATH"
+tmux select-pane -t "$SESSION_NAME:extra.0"
 
 tmux select-window -t "$SESSION_NAME:editor"
 tmux attach -t "$SESSION_NAME"
