@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-USAGE="Usage: dev -p <path>"
+USAGE="Usage: dev [-p <path>]"
 EDITOR_CMD="${EDITOR:-nvim}"
 
 show_help() {
   echo "$USAGE"
   echo ""
-  echo "  -p <path>   Path to working directory"
+  echo "  -p <path>   Path to working directory (default: current directory)"
   echo "  -h          Show this help message"
   exit 0
 }
@@ -19,11 +19,7 @@ while getopts "p:h" opt; do
   esac
 done
 
-if [ -z "$PROJECT_PATH" ]; then
-  echo "Error: -p <path> is required" >&2
-  echo "$USAGE" >&2
-  exit 1
-fi
+PROJECT_PATH="${PROJECT_PATH:-.}"
 
 if [ ! -d "$PROJECT_PATH" ]; then
   echo "Error: '$PROJECT_PATH' is not a valid directory" >&2
